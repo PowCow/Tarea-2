@@ -2,6 +2,7 @@
 
 
 *actualizar en github
+
 git add .
 
 git commit -m "comentarios"
