@@ -1,4 +1,3 @@
-#include "TDAs/tarea2_lecturacsv.h"
 #include "TDAs/extra.h"
 #include "TDAs/list.h"
 #include "TDAs/map.h"
@@ -10,7 +9,7 @@ typedef struct { //wao wao wao wao
     char ID[100] ;
     char titulo[100] ;
     char album[100] ;
-    char artista[100] ;
+    char **artista ;
     char genero[100] ;
     int tempo; 
 } Cancion;
@@ -21,6 +20,7 @@ typedef struct {
 } Playlist;
 
 void mostrarMenuPrincipal() { //LISTO
+
     puts("========================================") ;
     puts("     Base de Datos de Canciones") ;
     puts("========================================");
@@ -35,10 +35,53 @@ void mostrarMenuPrincipal() { //LISTO
 
 }
 
+void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesMax) {
+    FILE *archivo = fopen("song_dataset_.csv", "r") ;
+    if (archivo == NULL) {
+        perror("Error al abrir el archivo") ; 
+        return;
+    }
+  
+    char **campos;
+    // Leer y parsear una línea del archivo CSV. La función devuelve un array de
+    // strings, donde cada elemento representa un campo de la línea CSV procesada.
+    campos = leer_linea_csv(archivo, ',') ; // Lee los encabezados del CSV
+  
+    long k = 0;
+    // Lee cada línea del archivo CSV hasta el final
+    while ((campos = leer_linea_csv(archivo, ',')) != NULL) {
+      
+        if (k > cancionesMax) break; //carga primeras n canciones
+        Cancion *cancion = malloc(sizeof(Cancion)) ;
+        if (cancion == NULL) exit(EXIT_FAILURE) ;
+        
+        strncpy(cancion->ID, campos[0], sizeof(cancion->ID)) ;
+        strncpy(cancion->titulo, campos[4], sizeof(cancion->titulo)) ;
+        strncpy(cancion->album, campos[3], sizeof(cancion->album)) ;
+        strncpy(cancion->genero, campos[20], sizeof(cancion->genero)) ;
+        cancion->artista = split_string(campos[2], ";") ;
+        cancion->tempo = atoi(campos[18]) ;
+        
+        
+        List *artistas = split_string(campos[2], ";") ; //separar artistas por ;
+        printf("Artistas: \n");
+        for(char *artista = list_first(artistas); artista != NULL ; artista = list_next(artistas))
+            printf("  %s\n", artista) ;
+  
+        printf("Album: %s\n", campos[3]) ;
+        printf("Genero: %s\n", campos[20]) ;
+        printf("Tempo: %.2f\n", atof(campos[18])) ;
+        printf(" -------------------------------\n") ;
+  
+        k++;
+    }
+    fclose(archivo); 
+}
+
 int is_equal_str(const void *key1, const void *key2) { 
     return strcmp((char *)key1, (char *)key2) == 0; 
 }
-    
+
 int is_equal_int(const void *key1, const void *key2) {
     return *(int *)key1 == *(int *)key2; 
 }
@@ -66,7 +109,6 @@ int main() {
     Map *cancionesGenero = map_create(is_equal_str) ;
 
 
-    leer_canciones(cancionesID, cancionesArtista, cancionesGenero);
     unsigned short opcion ;
     long cancionesCargadas = 0 ;
     
