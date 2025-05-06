@@ -21,13 +21,7 @@ void mostrarMenuPrincipal() {
     puts("6) Agregar cancion a lista de reproduccion") ;
     puts("7) Mostrar lista de reproduccion") ;
     puts("8) Salir") ;
-  }
-
-
-
-
-
-
+}
 
 
 int main() {
@@ -70,5 +64,5 @@ int main() {
                 break ;
         }
     } while (opcion != 8) ;
-    return 0;
+    return EXIT_SUCCESS;
 }
