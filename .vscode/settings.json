@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "extra.h": "c",
+        "list.h": "c",
+        "map.h": "c"
+    }
+}
