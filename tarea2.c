@@ -9,7 +9,7 @@ typedef struct { //wao wao wao wao
     char ID[100] ;
     char titulo[100] ;
     char album[100] ;
-    char **artista ;
+    List *artista ;
     char genero[100] ;
     int tempo; 
 } Cancion;
@@ -41,7 +41,6 @@ void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesM
         perror("Error al abrir el archivo") ; 
         return;
     }
-  
     char **campos;
     // Leer y parsear una línea del archivo CSV. La función devuelve un array de
     // strings, donde cada elemento representa un campo de la línea CSV procesada.
@@ -59,20 +58,31 @@ void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesM
         strncpy(cancion->titulo, campos[4], sizeof(cancion->titulo)) ;
         strncpy(cancion->album, campos[3], sizeof(cancion->album)) ;
         strncpy(cancion->genero, campos[20], sizeof(cancion->genero)) ;
-        cancion->artista = split_string(campos[2], ";") ;
         cancion->tempo = atoi(campos[18]) ;
+        cancion->artista = split_string(campos[2], ";") ;
+
+        List *artistas = split_string(campos[2], ";");
+        char artista = list_first(artistas);
+        if (artista) strcpy(cancion->artista, artista);
         
-        
-        List *artistas = split_string(campos[2], ";") ; //separar artistas por ;
-        printf("Artistas: \n");
-        for(char *artista = list_first(artistas); artista != NULL ; artista = list_next(artistas))
-            printf("  %s\n", artista) ;
-  
-        printf("Album: %s\n", campos[3]) ;
-        printf("Genero: %s\n", campos[20]) ;
-        printf("Tempo: %.2f\n", atof(campos[18])) ;
-        printf(" -------------------------------\n") ;
-  
+        map_insert(mapID, cancion->ID, cancion) ; // Insertar en el mapa por ID
+
+        List *listaGenero = map_search(mapGenero, cancion->genero);
+        if (listaGenero == NULL) {
+            listaGenero = list_create();
+            map_insert(mapGenero, cancion->genero, listaGenero);
+        }
+        list_pushBack(listaGenero, cancion);
+
+        for (char *artista = list_first(cancion->artista); artista != NULL; artista = list_next(cancion->artista)) {
+            List *listaArtista = map_search(mapArtista, artista) ;
+            if (listaArtista == NULL) {
+                listaArtista = list_create() ;
+                map_insert(mapArtista, artista, listaArtista) ;
+            }
+            list_pushBack(listaArtista, cancion) ;
+        }
+
         k++;
     }
     fclose(archivo); 
