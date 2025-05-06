@@ -61,18 +61,7 @@ void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesM
         cancion->tempo = atoi(campos[18]) ;
         cancion->artista = split_string(campos[2], ";") ;
 
-        List *artistas = split_string(campos[2], ";");
-        char artista = list_first(artistas);
-        if (artista) strcpy(cancion->artista, artista);
-        
         map_insert(mapID, cancion->ID, cancion) ; // Insertar en el mapa por ID
-
-        List *listaGenero = map_search(mapGenero, cancion->genero);
-        if (listaGenero == NULL) {
-            listaGenero = list_create();
-            map_insert(mapGenero, cancion->genero, listaGenero);
-        }
-        list_pushBack(listaGenero, cancion);
 
         for (char *artista = list_first(cancion->artista); artista != NULL; artista = list_next(cancion->artista)) {
             List *listaArtista = map_search(mapArtista, artista) ;
@@ -82,6 +71,15 @@ void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesM
             }
             list_pushBack(listaArtista, cancion) ;
         }
+        
+        List *listaGenero = map_search(mapGenero, cancion->genero);
+        if (listaGenero == NULL) {
+            listaGenero = list_create();
+            map_insert(mapGenero, cancion->genero, listaGenero);
+        }
+        list_pushBack(listaGenero, cancion);
+
+        
 
         k++;
     }
@@ -107,11 +105,11 @@ void busquedaArtista(Map *cancionesArtista) {
     que coincidan con la información de cada una.*/
 }
 
-void busquedaTempo( ){
+//void busquedaTempo( ){
     /*la usuaria ingresa "velocidad" - lentas (tempo menos de 80 BPM),
     -moderadas (tempo entre 80 y 120 BPM) y -rapidas (tempo más de 120 BPM)*/
     /* La aplicación muestra todas las canciones que coincidan con la información de cada una.*/
-}
+//}
 
 int main() {
     Map *cancionesID = map_create(is_equal_str) ;
