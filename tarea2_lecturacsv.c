@@ -5,7 +5,7 @@
 #include <string.h>
 
 /**
- * Carga canciones desde un archivo CSV CACA 
+ * Carga canciones desde un archivo CSV 
  */
 void leer_canciones() {
   // Intenta abrir el archivo CSV que contiene datos de películas
@@ -50,6 +50,6 @@ void leer_canciones() {
 
 int main() {
     leer_canciones();
-
+    
   return 0;
 }
