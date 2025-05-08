@@ -21,3 +21,5 @@ gcc tarea2.c TDAs/*.c -o tarea2.exe
     2. las opciones que funcionan correctamente y las que no lo hacen indicando posibles causas;
     3. un ejemplo mostrando como interactuar con la aplicación.
     4. **en caso de trabajar en pareja**: detalle de las contribuciones realizada por cada integrante.
+
+**Si quiero agregar la cancion ID 20000 tengo que cargar 20000 canciones de una, no se suman las cargas**

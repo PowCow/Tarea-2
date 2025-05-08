@@ -151,7 +151,7 @@ void busquedaGenero(Map *cancionesGenero) { //LISTO
     }
 }
 
-void busquedaArtista(Map *cancionesArtista) { //LISTO (se deberian agregar esas vainas de limpiar pantalla etc)
+void busquedaArtista(Map *cancionesArtista) { //LISTO 
     puts("=========================================") ;
     puts("         BUSQUEDA POR ARTISTA") ; 
     puts("=========================================") ;
@@ -211,11 +211,7 @@ void mostrarCancion(Cancion *cancion, int cont) {
     puts("------------------------------------------\n") ;
 }
 
-void busquedaTempo(Map *cancionesID) {
-    /*la usuaria ingresa "velocidad" - lentas (tempo menos de 80 BPM),
-    -moderadas (tempo entre 80 y 120 BPM) y -rapidas (tempo más de 120 BPM)*/
-    /* La aplicación muestra todas las canciones que coincidan con la información de cada una.
-    Luego, la aplicación muestra todas las canciones de esa categoría junto con su información.*/
+void busquedaTempo(Map *cancionesID) { //LISTO
     puts("=========================================") ;
     puts("         BUSQUEDA POR TEMPO") ; 
     puts("=========================================") ;
@@ -271,10 +267,160 @@ void busquedaTempo(Map *cancionesID) {
     }
 }
 
+void crear_ListaReproduccion(Map *mapPlaylist) { //LISTO
+    puts("=========================================") ;
+    puts("         CREAR LISTA DE REPRODUCCION") ; 
+    puts("=========================================") ;
+    printf("\nIngrese el nombre de la lista de reproduccion: \n") ;
+
+    char nombrePlaylist[100] ;
+    fgets(nombrePlaylist, sizeof(nombrePlaylist), stdin) ;
+    nombrePlaylist[strcspn(nombrePlaylist, "\n")] = '\0' ; 
+
+    Playlist *playlist = malloc(sizeof(Playlist)) ;
+    if (playlist == NULL) {
+        puts("Error al crear la lista de reproduccion") ;
+        exit(EXIT_FAILURE) ;}
+
+    playlist->canciones = list_create() ;
+    strncpy(playlist->nombrePlaylist, nombrePlaylist, sizeof(playlist->nombrePlaylist)) ;
+
+    MapPair *par = map_search(mapPlaylist, playlist->nombrePlaylist) ;
+    if (par != NULL) {
+        printf("Ya existe una lista de reproduccion con ese nombre\n") ;
+        return ;
+    }
+    else {
+        map_insert(mapPlaylist, playlist->nombrePlaylist, playlist) ;
+    }
+    printf("Lista de reproduccion %s creada con exito!\n", playlist->nombrePlaylist) ;
+}
+
+void agregar_cancion_ListaReproduccion(Map *mapPlaylist, Map *cancionesID) { //LISTO
+    puts("=========================================") ;
+    puts("         AGREGAR CANCION A PLAYLIST") ;
+    puts("=========================================") ;
+    printf("\nIngrese el nombre de la lista de reproduccion: \n") ;
+    
+    char nombrePlaylist[100] ;
+    fgets(nombrePlaylist, sizeof(nombrePlaylist), stdin) ;
+    nombrePlaylist[strcspn(nombrePlaylist, "\n")] = '\0' ;
+    MapPair *par = map_search(mapPlaylist, nombrePlaylist) ;
+
+    if (par == NULL) {
+        printf("No existe una lista de reproduccion con ese nombre\n") ;
+        return ;
+    }
+    else {
+        puts("Lista de reproduccion encontrada!") ;
+        printf("Ingrese el ID de la cancion a agregar: \n") ;
+        char ID[100] ;
+        fgets(ID, sizeof(ID), stdin) ;
+        ID[strcspn(ID, "\n")] = '\0' ;
+        
+        MapPair *parCancion = map_search(cancionesID, ID) ;
+        if (parCancion == NULL) {
+            puts("No se encontro una cancion con ese ID") ;
+            return ;
+        }
+        
+        puts("Cancion encontrada!") ;
+        Cancion *cancion = (Cancion*)parCancion->value ;
+        Playlist *playlist = (Playlist*)par->value ;
+
+        List *cancionesPlaylist = playlist->canciones ;
+        Cancion *cancionExistente = list_first(cancionesPlaylist) ;
+        while (cancionExistente != NULL) {
+            if (strcmp(cancion->ID, cancionExistente->ID) == 0) {
+                printf("La cancion '%s' ya existe en la lista de reproduccion\n", cancion->titulo) ;
+                return ;
+            }
+            cancionExistente = list_next(cancionesPlaylist) ;
+        }
+        list_pushBack(cancionesPlaylist, cancion) ;
+        printf("Cancion '%s' ha sido agregada a la lista de reproduccion %s\n", cancion->titulo, playlist->nombrePlaylist) ;
+    }
+}
+
+void mostrar_canciones_ListaReproduccion(Map *mapPlaylist) {
+    puts("=========================================") ;
+    puts("     MOSTRAR CANCIONES DE PLAYLIST") ;
+    puts("=========================================") ;
+    printf("\nIngrese el nombre de la lista de reproduccion: \n") ;
+    
+    char nombrePlaylist[100] ;
+    fgets(nombrePlaylist, sizeof(nombrePlaylist), stdin) ;
+    nombrePlaylist[strcspn(nombrePlaylist, "\n")] = '\0' ;
+    MapPair *par = map_search(mapPlaylist, nombrePlaylist) ;
+
+    if (par == NULL) {
+        printf("No existe una lista de reproduccion con ese nombre\n") ;
+        return ;
+    }
+    
+    puts("Lista de reproduccion encontrada!") ;
+    Playlist *playlist = (Playlist*)par->value ;
+    List *cancionesPlaylist = (List*)playlist->canciones ;
+    Cancion *cancion = list_first(cancionesPlaylist) ;
+    
+    if (cancionesPlaylist == NULL || cancion == NULL) {
+        printf("No hay canciones en la lista de reproduccion %s\n", playlist->nombrePlaylist) ;
+        return ;
+    }
+    else {
+        printf("Canciones de la lista de reproduccion %s:\n\n", playlist->nombrePlaylist) ;
+        long cont = 1 ;
+        while (cancion != NULL) {
+            mostrarCancion(cancion, cont) ;
+            cancion = list_next(cancionesPlaylist) ;
+            cont++;
+        }
+    }
+}
+
+void limpiarCanciones(List *canciones) {
+    Cancion *cancion = list_first(canciones) ;
+    while (cancion != NULL) {
+        list_clean(cancion->artista) ;
+        free(cancion) ;
+        cancion = list_next(canciones) ;
+    }
+    list_clean(canciones) ;
+}
+
+void limpiarMapa(Map *map) {
+    MapPair *pair = map_first(map) ;
+    while (pair != NULL) {
+        List *canciones = (List*)pair->value ;
+        limpiarCanciones(canciones) ;
+        pair = map_next(map) ;
+    }
+    map_clean(map) ;
+}
+
+void limpiarMapaID(Map *map) {
+    MapPair *pair = map_first(map) ;
+    while (pair != NULL) {
+        Cancion *cancion = (Cancion*)pair->value ;
+        list_clean(cancion->artista) ;
+        free(cancion) ;
+        pair = map_next(map) ;
+    }
+    map_clean(map) ;
+}
+
+void limpiarTodo(Map *mapID, Map *mapArtista, Map *mapGenero, Map *mapPlaylist) {
+    limpiarMapaID(mapID) ;
+    limpiarMapa(mapArtista) ;
+    limpiarMapa(mapGenero) ;
+    limpiarMapa(mapPlaylist) ;
+}
+
 int main() {
     Map *cancionesID = map_create(is_equal_str) ;
     Map *cancionesArtista = map_create(is_equal_str) ;
     Map *cancionesGenero = map_create(is_equal_str) ;
+    Map *mapPlaylist = map_create(is_equal_str) ;
 
     unsigned short opcion ;
     long cancionesCargadas = 0 ;
@@ -306,17 +452,17 @@ int main() {
                 break ;
             case 5:
                 system("cls||clear") ;
-                //pendejada
+                crear_ListaReproduccion(mapPlaylist) ;
                 break ;
             case 6:
                 system("cls||clear") ;
-                //pendejada
+                agregar_cancion_ListaReproduccion(mapPlaylist, cancionesID) ;
                 break ;
             case 7:
                 system("cls||clear") ;
-                //pendejada
+                mostrar_canciones_ListaReproduccion(mapPlaylist) ;
                 break ;
-            case 8:
+            case 8: //Opcion para salir
                 system("cls||clear") ;
                 break;
             default:
@@ -327,6 +473,6 @@ int main() {
         }
     } while (opcion != 8) ;
 
-    //funcion pa limpiar
+    limpiarTodo(cancionesID, cancionesArtista, cancionesGenero, mapPlaylist) ;
     return EXIT_SUCCESS;
 }
