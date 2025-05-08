@@ -35,7 +35,7 @@ void mostrarMenuPrincipal() { //LISTO
 
 }
 
-void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesMax) {
+void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesMax) { //LISTO
     FILE *archivo = fopen("song_dataset_.csv", "r") ;
     if (archivo == NULL) {
         perror("Error al abrir el archivo") ; 
@@ -100,15 +100,58 @@ int is_equal_int(void *key1, void *key2) {
     return *(int *)key1 == *(int *)key2; 
 }
 
-void busquedaGenero(Map *cancionesGenero) { 
-    /* La usuaria ingresa un género (p. ej. “acoustic”, “samba”, “soul”, “anime”) 
-    y la aplicación muestra todas las canciones que coincidan con la información de
-    cada una.*/
+void busquedaGenero(Map *cancionesGenero) { //LISTO
+    puts("=========================================") ;
+    puts("         BUSQUEDA POR GENERO") ; 
+    puts("=========================================") ;
+    printf("\nIngrese el nombre del genero: \n") ;
+
+    char genero[100] ;
+    fgets (genero, sizeof(genero), stdin) ;
+    genero[strcspn(genero, "\n")] = '\0' ; 
+    
+    if (cancionesGenero == NULL) {
+        printf("No hay canciones en registro\n") ;
+        return ;
+    } 
+
+    MapPair *par = map_search(cancionesGenero, genero) ;
+    if (par == NULL) {
+        printf("No se encontraron canciones del genero: %s\n", genero) ;
+        return ;
+    } 
+    else {
+        printf("Canciones del genero %s:\n\n", genero) ;
+        List *canciones = (List *)par->value ;
+        Cancion *cancion = list_first(canciones) ;
+        long cont = 1;
+        
+        while (cancion != NULL) {
+            printf("Cancion %ld\n", cont) ;
+            printf("ID: %s\n", cancion->ID) ;
+            printf("Titulo: %s\n", cancion->titulo) ;
+            printf("Album: %s\n", cancion->album) ;
+
+            printf("Artistas: ");
+            
+            char *artista = list_first(cancion->artista) ;
+            while (artista != NULL) {
+                printf("%s", artista) ;
+                artista = list_next(cancion->artista) ;
+                if (artista != NULL) {
+                    printf(" - ") ;
+                }
+            }
+            printf("\nTempo: %d BPM\n\n", cancion->tempo) ;
+            
+            cancion = list_next(canciones) ;
+            cont++;
+            puts("------------------------------------------\n") ;
+        }
+    }
 }
 
-void busquedaArtista(Map *cancionesArtista) {
-    /* La usuaria ingresa el nombre de un artista y la aplicación muestra todas las canciones 
-    que coincidan con la información de cada una.*/
+void busquedaArtista(Map *cancionesArtista) { //LISTO (se deberian agregar esas vainas de limpiar pantalla etc)
     puts("=========================================") ;
     puts("         BUSQUEDA POR ARTISTA") ; 
     puts("=========================================") ;
@@ -125,36 +168,116 @@ void busquedaArtista(Map *cancionesArtista) {
     
     MapPair *par = map_search(cancionesArtista, artista) ;
     if (par == NULL) {
-        printf("No se encontraron canciones de %s\n", artista) ;
+        printf("No se encontraron canciones del artista: %s\n", artista) ;
         return ;
     } 
     else {
+        printf("Canciones del artista %s:\n\n", artista) ;
         List *canciones = (List *)par->value ;
         Cancion *cancion = list_first(canciones) ;
+        long cont = 1;
         while (cancion != NULL) {
-            printf("ID: %s | Titulo: %s | Album: %s | Genero: %s | Tempo: %d BPM\n", 
-                cancion->ID, cancion->titulo, cancion->album, cancion->genero, cancion->tempo) ;
+            printf("Cancion %ld\n", cont) ;
+            printf("ID: %s\n", cancion->ID) ;
+            printf("Titulo: %s\n", cancion->titulo) ;
+            printf("Album: %s\n", cancion->album) ;
+            printf("Genero: %s\n", cancion->genero) ;
+            printf("Tempo: %d BPM\n\n", cancion->tempo) ;
+            
             cancion = list_next(canciones) ;
+            cont++;
+            puts("------------------------------------------\n") ;
         }
     }
-
+    
 }
 
-//void busquedaTempo( ){
+void mostrarCancion(Cancion *cancion, int cont) {
+    printf("Cancion %ld\n", cont) ;
+    printf("ID: %s\n", cancion->ID) ;
+    printf("Titulo: %s\n", cancion->titulo) ;
+    printf("Album: %s\n", cancion->album) ;
+    printf("Artistas: ");
+    char *artista = list_first(cancion->artista);
+    while (artista != NULL) {
+        printf("%s", artista);
+        artista = list_next(cancion->artista);
+        if (artista != NULL) {
+            printf(" - ");
+        }
+    }
+        printf("\nGenero: %s\n", cancion->genero) ;
+        printf("Tempo: %d BPM\n\n", cancion->tempo) ;
+    puts("------------------------------------------\n") ;
+}
+
+void busquedaTempo(Map *cancionesID) {
     /*la usuaria ingresa "velocidad" - lentas (tempo menos de 80 BPM),
     -moderadas (tempo entre 80 y 120 BPM) y -rapidas (tempo más de 120 BPM)*/
-    /* La aplicación muestra todas las canciones que coincidan con la información de cada una.*/
-//}
+    /* La aplicación muestra todas las canciones que coincidan con la información de cada una.
+    Luego, la aplicación muestra todas las canciones de esa categoría junto con su información.*/
+    puts("=========================================") ;
+    puts("         BUSQUEDA POR TEMPO") ; 
+    puts("=========================================") ;
+    printf("\nIngrese una opcion de tempo: \n") ;
+    printf("1) Lentas (Tempo menos de 80 BPM)\n") ;
+    printf("2) Moderadas (Tempo entre 80 y 120 BPM)\n") ;
+    printf("3) Rapidas (Tempo mayor a 120 BPM)\n") ;
+    unsigned short tempo ;
+    scanf("%hu", &tempo) ;
+    getchar() ;
+
+    if (cancionesID == NULL) {
+        printf("No hay canciones en registro\n") ;
+        return ;}
+
+    if (tempo >= 0 && tempo < 80) 
+        puts(" ======CANCIONES LENTAS====== \n") ; 
+    else if (tempo >= 80 && tempo <= 120) 
+        puts(" ======CANCIONES MODERADAS====== \n") ;	 
+    else if (tempo > 120) 
+        puts(" ======CANCIONES RAPIDAS====== \n") ; 
+    
+        
+    MapPair *pair = map_first(cancionesID) ;
+    long cont = 1;
+    while (pair != NULL) {
+        Cancion *cancion = (Cancion*)pair->value ;
+        int tempoCancion = cancion->tempo;
+        switch (tempo) {
+            case 1:
+                if (tempoCancion >= 0 && tempoCancion < 80) {
+                    mostrarCancion(cancion, cont) ;
+                    cont++;
+                }
+                break ;
+            case 2:
+                if (tempoCancion >= 80 && tempoCancion <= 120) {
+                    mostrarCancion(cancion, cont) ;
+                    cont++;
+                }
+                break ;
+            case 3:
+                if (tempoCancion > 120) {
+                    mostrarCancion(cancion, cont) ;
+                    cont++;
+                }
+                break ;
+            default:
+                puts("Opcion de tempo no valida.");
+                break; 
+        }
+        pair = map_next(cancionesID) ;
+    }
+}
 
 int main() {
     Map *cancionesID = map_create(is_equal_str) ;
     Map *cancionesArtista = map_create(is_equal_str) ;
     Map *cancionesGenero = map_create(is_equal_str) ;
 
-
     unsigned short opcion ;
     long cancionesCargadas = 0 ;
-    
     do {
         mostrarMenuPrincipal() ;
         scanf("%hu", &opcion) ;
@@ -170,26 +293,32 @@ int main() {
                 leer_canciones(cancionesID, cancionesArtista, cancionesGenero, cancionesCargadas) ;
                 break;
             case 2:
-                //busquedaGenero(cancionesGenero) ;
+                system("cls||clear") ;
+                busquedaGenero(cancionesGenero) ;
                 break ;
             case 3:
+                system("cls||clear") ;
                 busquedaArtista(cancionesArtista) ;
                 break ;
             case 4:
-                //busquedaTempo() ;
+                system("cls||clear") ;
+                busquedaTempo(cancionesID) ;
                 break ;
             case 5:
+                system("cls||clear") ;
                 //pendejada
                 break ;
             case 6:
+                system("cls||clear") ;
                 //pendejada
                 break ;
             case 7:
+                system("cls||clear") ;
                 //pendejada
                 break ;
             case 8:
-                //pendejada
-                break ;
+                system("cls||clear") ;
+                break;
             default:
                 system("cls||clear") ;
                 printf("Opcion no valida, intente nuevamente...\n") ;
@@ -197,5 +326,7 @@ int main() {
                 break ;
         }
     } while (opcion != 8) ;
+
+    //funcion pa limpiar
     return EXIT_SUCCESS;
 }
