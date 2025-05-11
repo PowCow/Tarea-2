@@ -20,6 +20,8 @@ SpotiFind es una aplicacion de consola que permite explorar una base de datos mu
        * Funcion de Busqueda por Artista, se ingresa el nombre del artista, se busca si existe el artista y si tiene canciones con su nombre, si existe, se muestran las canciones con el resto de datos
        * Funcion de Busqueda por Tempo, se ingresa el tempo segun preferencia, lenta, moderada o rapida, se busca si existen canciones ingresadas con ese tempo y se muestran los datos de las canciones
        * Funcion "Crear lista de Reproduccion", el usuario ingresa el nombre de la nueva lista de reproduccion, esta se guarda en la memoria y muestra al usuario si ya existia una lista con ese nombre o si hubo un error al crear la lista
+       * Funcion "Agregar Cancion a lista de Reproduccion", pregunta por el nombre de la lista pra verificar si ya esta creada, si no existe se avisa al usuario, si existe, pide al usuario el ID de la cancion a agregar, si no existe la cancion, se avisa a usuario, si ya estaba en la lista, tambien se avisa a usuario, si no estaba, muestra al usuario que se ha agregado correctamente
+       * Funcion Mostrar Cancion de una Playlist, se le pregunta al usuario el nombre de la playlist, la funcion busca y muestra todas las canciones que se han agregado 
 
     - Problemas Conocidos :
        * Al agregar mayor cantidad de canciones, mas demora al cargar.
