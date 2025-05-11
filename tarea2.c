@@ -227,11 +227,11 @@ void busquedaTempo(Map *cancionesID) { //LISTO
         printf("No hay canciones en registro\n") ;
         return ;}
 
-    if (tempo >= 0 && tempo < 80) 
+    if (tempo == 1) 
         puts(" ======CANCIONES LENTAS====== \n") ; 
-    else if (tempo >= 80 && tempo <= 120) 
+    else if (tempo == 2) 
         puts(" ======CANCIONES MODERADAS====== \n") ;	 
-    else if (tempo > 120) 
+    else if (tempo == 3) 
         puts(" ======CANCIONES RAPIDAS====== \n") ; 
     
         
@@ -261,7 +261,8 @@ void busquedaTempo(Map *cancionesID) { //LISTO
                 break ;
             default:
                 puts("Opcion de tempo no valida.");
-                break; 
+                return ;
+            
         }
         pair = map_next(cancionesID) ;
     }
