@@ -6,7 +6,10 @@ DESCRIPCION
 SpotiFind es una aplicacion de consola que permite explorar una base de datos musical y buscar canciones segun distintos criterios: genero, artista o tempo (velocidad de la cancion). Tambien permite cargar canciones desde un archivo CSV y organizar musica de manera eficiente. 
 
 1. Como compilar y ejecutar :
-    
+    Como ejecutar el programa
+    Para ejecutar nuestro programa deberás descargar los archivos "tarea2.exe" y "songdataset.csv". A continuación deberás crear una nueva carpeta y mover los archivos anteriormente descargados, deberá quedar en un formato parecido a la carpeta "programa" adjunta en el repositorio. 
+
+    Al abrir la carpeta ya con los archivos adjuntos, unicamente hará falta ejecutar el archivo "tarea2.exe".
 
         gcc tarea2.c TDAs/*.c -o tarea2.exe
 
@@ -26,6 +29,7 @@ SpotiFind es una aplicacion de consola que permite explorar una base de datos mu
     - Problemas Conocidos :
        * Al agregar mayor cantidad de canciones, mas demora al cargar.
        * Si quiero agregar la cancion "ID 20000" tengo que cargar 20000 canciones de una, no se suman las cargas
+       * Al escribir letras en la zona de carga de canciones (opcion 1) no salta error, aunque igualmente no carga ningun tipo de cancion
        * 
    
 4. Ejemplo de interaccion con la aplicacion :
