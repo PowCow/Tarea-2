@@ -5,12 +5,14 @@ DESCRIPCIÓN
 
 SpotiFind es una aplicación de que se carga en la termina que permite explorar una base de datos musical y buscar canciones según distintos criterios: género, artista o tempo (velocidad de la canción). Para poder hacer esto, la aplicación carga un gran volumen de canciones con su respectiva información desde un archivo .CSV.  Una de las funcionalidades destacadas yace en la capacidad de crear listas de reproducciones personalizadas, pudiendo así organizarlas por preferencia.
 
-1. Como compilar y ejecutar :
-   
-    Para ejecutar nuestro programa deberás descargar los archivos "tarea2.exe" y "songdataset.csv". A continuación deberás crear una nueva carpeta y mover los archivos anteriormente descargados, deberá quedar en un formato parecido a la carpeta "programa" adjunta en el repositorio. 
+1. Como ejecutar el programa:
+   Para ejecutar el programa deberás descargar el archivo .rar de el siguiente link: https://www.mediafire.com/file/iqfqj67guowuup5/programa.rar/file
+   Luego tendrás que extraer los archivos del .rar haciendo click derecho en el y seleccionar la opción: Extraer en "programa\". A continuación te dejará una carpeta con ambos archivos en
+   su interior, unicamente hará falta ejecutar el archivo "tarea2.exe".
 
-   Al abrir la carpeta ya con los archivos adjuntos, unicamente hará falta ejecutar el archivo "tarea2.exe".
-   Link de descarga : https://www.mediafire.com/file/iqfqj67guowuup5/programa.rar/file
+   * Requisitos previos:
+      - Tener WinRar instalado, si no lo tienes, este es el link de la página para instalarlo: https://winrar.es/descargas
+      - Sistema operativo: Windows. Debido a falta de pruebas, no hemos podido determinar si funciona en el sistema macOS
    
 3. Opciones que funcionan correctamente y las que no (posibles causas) :
     - Funcionando Correctamente :
