@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct { //wao wao wao wao
+typedef struct { 
     char ID[100] ;
     char titulo[100] ;
     char album[100] ;
@@ -19,6 +19,8 @@ typedef struct {
     char nombrePlaylist[100] ;
 } Playlist;
 
+
+// Procedimiento para mostrar el menu principal
 void mostrarMenuPrincipal() { //LISTO
 
     puts("========================================") ;
@@ -35,6 +37,10 @@ void mostrarMenuPrincipal() { //LISTO
 
 }
 
+/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee una linea 
+del csv que es una cancion y la guarda en el struct Cancion, luego la inserta con un push back
+en los distintos mapas, esto se repite el numero de veces que el usuario indico, osea carga 
+n canciones */
 void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesMax) { //LISTO
     FILE *archivo = fopen("song_dataset_.csv", "r") ;
     if (archivo == NULL) {
@@ -92,14 +98,17 @@ void leer_canciones(Map* mapID, Map* mapArtista, Map* mapGenero, long cancionesM
     fclose(archivo); 
 }
 
+/* Funcion para poder crear un mapa vacio */
 int is_equal_str(void *key1, void *key2) { 
     return strcmp((char *)key1, (char *)key2) == 0; 
 }
-
+/* Funcion para poder crear un mapa vacio */
 int is_equal_int(void *key1, void *key2) {
     return *(int *)key1 == *(int *)key2; 
 }
 
+/* Muestra un menu, lee el genero que ingresa el usuario, si es mapa es nulo retorna, si el genero no existe retorna,
+en cualquier otro caso ingresa al mapa del genero e imprime todas sus canciones con su respectiva informacion */
 void busquedaGenero(Map *cancionesGenero) { //LISTO
     puts("=========================================") ;
     puts("         BUSQUEDA POR GENERO") ; 
@@ -151,6 +160,8 @@ void busquedaGenero(Map *cancionesGenero) { //LISTO
     }
 }
 
+/* Muestra un menu inicial, lee el artista que ingresa el usuario, verifica si el mapa es nulo, verifica si el artista esta 
+en el mapa, si esta en el mapa, muestra un mensaje respecto al artista y muestra las canciones de ese artista */
 void busquedaArtista(Map *cancionesArtista) { //LISTO 
     puts("=========================================") ;
     puts("         BUSQUEDA POR ARTISTA") ; 
@@ -192,6 +203,7 @@ void busquedaArtista(Map *cancionesArtista) { //LISTO
     
 }
 
+/* Funcion para mostrar los datos de la cancion y ahorarnos lineas */
 void mostrarCancion(Cancion *cancion, int cont) {
     printf("Cancion %ld\n", cont) ;
     printf("ID: %s\n", cancion->ID) ;
@@ -211,6 +223,8 @@ void mostrarCancion(Cancion *cancion, int cont) {
     puts("------------------------------------------\n") ;
 }
 
+/* Muestra un menu, donde el usuario ingresa la opcion deseada, si no esta dentro de las posibilidades, se retorna.
+Verifica que el mapa de IDs exista, luego imprime las canciones que entren en las condiciones especificadas */
 void busquedaTempo(Map *cancionesID) { //LISTO
     puts("=========================================") ;
     puts("         BUSQUEDA POR TEMPO") ; 
@@ -268,6 +282,8 @@ void busquedaTempo(Map *cancionesID) { //LISTO
     }
 }
 
+/* Muestra un menu inicial, lee el nombre de la playlist que ingresa el usuario, reserva memoria y crea una lista,
+luego busca en el mapa de listas si existe, si no existe, se ingresa exitosamente */
 void crear_ListaReproduccion(Map *mapPlaylist) { //LISTO
     puts("=========================================") ;
     puts("         CREAR LISTA DE REPRODUCCION") ; 
@@ -297,6 +313,9 @@ void crear_ListaReproduccion(Map *mapPlaylist) { //LISTO
     printf("Lista de reproduccion %s creada con exito!\n", playlist->nombrePlaylist) ;
 }
 
+/* Muestra un menu inicial, lee el nombre de la playlist ingresado por el usuario y verifica si existe,
+luego debe el usuario ingresar la ID de la cancion a agregar, si no existe lo especifica y retorna,
+si existe avisa, verifica si la cancion ya esta en la playlist, si no esta la agrega existosamente */
 void agregar_cancion_ListaReproduccion(Map *mapPlaylist, Map *cancionesID) { //LISTO
     puts("=========================================") ;
     puts("         AGREGAR CANCION A PLAYLIST") ;
@@ -343,6 +362,9 @@ void agregar_cancion_ListaReproduccion(Map *mapPlaylist, Map *cancionesID) { //L
     }
 }
 
+/* Muestra un menu inicial, y lee el nombre de la playlist ingresado por el ususario, si no existe retorna,
+en caso de existir lo especifica, si la playlist esta vacia tambien lo especifica, de otra forma muestra 
+las canciones de la playlist en orden de ingreso */
 void mostrar_canciones_ListaReproduccion(Map *mapPlaylist) {
     puts("=========================================") ;
     puts("     MOSTRAR CANCIONES DE PLAYLIST") ;
@@ -379,6 +401,7 @@ void mostrar_canciones_ListaReproduccion(Map *mapPlaylist) {
     }
 }
 
+/* */
 void limpiarCanciones(List *canciones) {
     Cancion *cancion = list_first(canciones) ;
     while (cancion != NULL) {
@@ -389,6 +412,9 @@ void limpiarCanciones(List *canciones) {
     list_clean(canciones) ;
 }
 
+/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
+
+*/
 void limpiarMapa(Map *map) {
     MapPair *pair = map_first(map) ;
     while (pair != NULL) {
@@ -399,6 +425,9 @@ void limpiarMapa(Map *map) {
     map_clean(map) ;
 }
 
+/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
+
+*/
 void limpiarMapaID(Map *map) {
     MapPair *pair = map_first(map) ;
     while (pair != NULL) {
@@ -410,6 +439,9 @@ void limpiarMapaID(Map *map) {
     map_clean(map) ;
 }
 
+/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
+
+*/
 void limpiarTodo(Map *mapID, Map *mapArtista, Map *mapGenero, Map *mapPlaylist) {
     limpiarMapaID(mapID) ;
     limpiarMapa(mapArtista) ;
@@ -417,6 +449,9 @@ void limpiarTodo(Map *mapID, Map *mapArtista, Map *mapGenero, Map *mapPlaylist) 
     limpiarMapa(mapPlaylist) ;
 }
 
+/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
+
+*/
 int main() {
     Map *cancionesID = map_create(is_equal_str) ;
     Map *cancionesArtista = map_create(is_equal_str) ;
