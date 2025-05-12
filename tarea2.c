@@ -401,7 +401,7 @@ void mostrar_canciones_ListaReproduccion(Map *mapPlaylist) {
     }
 }
 
-/* */
+/* Limpia las canciones y libera memoria de cada una de ellas */
 void limpiarCanciones(List *canciones) {
     Cancion *cancion = list_first(canciones) ;
     while (cancion != NULL) {
@@ -412,9 +412,7 @@ void limpiarCanciones(List *canciones) {
     list_clean(canciones) ;
 }
 
-/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
-
-*/
+/* Limpia el mapa implementando la funcion de antes */
 void limpiarMapa(Map *map) {
     MapPair *pair = map_first(map) ;
     while (pair != NULL) {
@@ -425,9 +423,7 @@ void limpiarMapa(Map *map) {
     map_clean(map) ;
 }
 
-/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
-
-*/
+/* Recorre el mapa de IDs limpiando cada lista de artistas y cada cancion, para al final usar map_clean() */
 void limpiarMapaID(Map *map) {
     MapPair *pair = map_first(map) ;
     while (pair != NULL) {
@@ -439,9 +435,7 @@ void limpiarMapaID(Map *map) {
     map_clean(map) ;
 }
 
-/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
-
-*/
+/* Implemente todas las funciones anteriormente mencionadas*/
 void limpiarTodo(Map *mapID, Map *mapArtista, Map *mapGenero, Map *mapPlaylist) {
     limpiarMapaID(mapID) ;
     limpiarMapa(mapArtista) ;
@@ -449,9 +443,8 @@ void limpiarTodo(Map *mapID, Map *mapArtista, Map *mapGenero, Map *mapPlaylist) 
     limpiarMapa(mapPlaylist) ;
 }
 
-/* Abre el archivo  y retorna en caso de error, con la funcion leer_linea_csv() lee el csv
-
-*/
+/* Crea 4 mapas para las funcionalidades requeridas, y asigna variables, para mostrar el menu todo el rato usamos do while y dentro
+usamos un switch para cada una de las funcionalidades, al inicio de cada opcion limpiamos la pantalla para no colapsar la terminal */
 int main() {
     Map *cancionesID = map_create(is_equal_str) ;
     Map *cancionesArtista = map_create(is_equal_str) ;
