@@ -263,6 +263,7 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
    - Paulina Muñoz :
      * Creacion del MAIN y organizacion de las funciones
      * Auto-evaluación: 3 (Aporte excelente)
+
 Ambos hicimos mayor parte del trabajo al mismo tiempo, por consecuencia, la contribución individual es simple.
    
 
