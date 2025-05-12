@@ -31,16 +31,17 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
        * Al escribir letras en la zona de carga de canciones (opcion 1) no salta error, aunque igualmente no carga ningun tipo de cancion
        * Al ingresar alguna letra o simbolo en las opciones del menu, este regresa a la opcion anterior antes de llegar al menu, siendo que ya habia terminado la ejecucion de esa opcion
        * Al ingresar el nombre de un artista se debe ingresar correctamente, con una letra mayuscula al inicio de cada nombre (ej: B.B King)
-       * Todos los generos deben ser escritos en miniscula, no detecta genero escrito con una letra mayuscula o mayuscula total (ej: blues ✓ Blues ✗ BLUES ✗)
+       * Todos los generos deben ser escritos en miniscula, no detecta genero escrito con una letra mayuscula o mayuscula total
+         (ej: blues ✓ Blues ✗ BLUES ✗)
    
 4. Ejemplo de interaccion con la aplicacion :
     
    
 5. Contribucion de cada integrante :
-       Flavio Luna :
-           * Implementó las funciones para liberar memoria (Limpiar...)
-           * 
-       Paulina Muñoz :
-           * 
-           * 
+   - Flavio Luna :
+     * Implementó las funciones para liberar memoria (Limpiar...)
+   - Paulina Muñoz :
+     * Creacion del MAIN y organizacion de las funciones
+
+ 
 
