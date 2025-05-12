@@ -261,7 +261,8 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
      * Implementó las funciones para liberar memoria (Limpiar...)
    - Paulina Muñoz :
      * Creacion del MAIN y organizacion de las funciones
-   Ambos hicimos mayor parte del trabajo al mismo tiempo, por consecuencia, la contribución individual es simple.
+
+Ambos hicimos mayor parte del trabajo al mismo tiempo, por consecuencia, la contribución individual es simple.
    
 
 
