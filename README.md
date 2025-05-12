@@ -6,15 +6,13 @@ DESCRIPCIÓN
 SpotiFind es una aplicación de que se carga en la termina que permite explorar una base de datos musical y buscar canciones según distintos criterios: género, artista o tempo (velocidad de la canción). Para poder hacer esto, la aplicación carga un gran volumen de canciones con su respectiva información desde un archivo .CSV.  Una de las funcionalidades destacadas yace en la capacidad de crear listas de reproducciones personalizadas, pudiendo así organizarlas por preferencia.
 
 1. Como ejecutar el programa:
-   Para ejecutar el programa deberás descargar el archivo .rar de el siguiente link: https://www.mediafire.com/file/iqfqj67guowuup5/programa.rar/file
-   Luego tendrás que extraer los archivos del .rar haciendo click derecho en el y seleccionar la opción: Extraer en "programa\". A continuación te dejará una carpeta con ambos archivos en
-   su interior, unicamente hará falta ejecutar el archivo "tarea2.exe".
+   Para ejecutar el programa deberás descargar el archivo .rar de el siguiente link: https://www.mediafire.com/file/iqfqj67guowuup5/programa.rar/file. Luego tendrás que extraer los archivos del .rar haciendo click derecho en el y seleccionar la opción: Extraer en "programa\". A continuación te dejará una carpeta con ambos archivos en su interior, unicamente hará falta ejecutar el archivo "tarea2.exe".
 
    * Requisitos previos:
       - Tener WinRar instalado, si no lo tienes, este es el link de la página para instalarlo: https://winrar.es/descargas
       - Sistema operativo: Windows. Debido a falta de pruebas, no hemos podido determinar si funciona en el sistema macOS
    
-3. Opciones que funcionan correctamente y las que no (posibles causas) :
+2. Opciones que funcionan correctamente y las que no (posibles causas) :
     - Funcionando Correctamente :
        * Funcion para agregar el archivo .CSV y la carga de canciones
        * El Menu se muestra correctamente
@@ -34,8 +32,11 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
        * Al ingresar el nombre de un artista se debe ingresar correctamente, con una letra mayuscula al inicio de cada nombre (ej: B.B King)
        * Todos los generos deben ser escritos en miniscula, no detecta genero escrito con una letra mayuscula o mayuscula total
          (ej: blues ✓ Blues ✗ BLUES ✗)
-   
-4. Ejemplo de interaccion con la aplicacion :
+
+    - A mejorar :
+       * Guardar todos los datos de las canciones implementando la funcion toupper() anteriormente, para evitar errores comparando strings, por ejemplo ("Hola" != "hola").
+         
+3. Ejemplo de interaccion con la aplicacion :
     1. Al abrir el programa:
        
                ========================================
@@ -254,11 +255,14 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
        
             Cierra el programa 
    
-6. Contribucion de cada integrante :
+4. Contribucion de cada integrante :
    - Flavio Luna :
      * Implementó las funciones para liberar memoria (Limpiar...)
    - Paulina Muñoz :
      * Creacion del MAIN y organizacion de las funciones
+   Ambos hicimos mayor parte del trabajo al mismo tiempo, por consecuencia, la contribución individual es simple.
+   
+
 
  
 
