@@ -54,6 +54,7 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
             Seleccione cuantas canciones desea cargar (maximo = 113998):
 
    Ingresamos: 20000
+   
    Nos muestra lo siguiente:
 
          Cargando canciones...
@@ -67,7 +68,8 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
                =========================================
                
                Ingrese el nombre del genero:
-   Ingresamos: blues 
+   Ingresamos: blues
+   
    En este caso cargan 1000 canciones, pero mostramos en el ejemplo las 3 últimas:
 
          Cancion 998
@@ -106,7 +108,8 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
             =========================================
             
             Ingrese el nombre del artista:
-   Ingresamos: B.B. King 
+   Ingresamos: B.B. King
+   
    Y nos muestra:
 
          Canciones del artista B.B. King:
@@ -152,6 +155,7 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
             3) Rapidas (Tempo mayor a 120 BPM)
 
    Ingresamos: 3
+   
    Nos muestran todas las canciones correspondientes a ese tempo:
 
          Cancion 9845
@@ -249,7 +253,7 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
        
             Cierra el programa 
    
-5. Contribucion de cada integrante :
+6. Contribucion de cada integrante :
    - Flavio Luna :
      * Implementó las funciones para liberar memoria (Limpiar...)
    - Paulina Muñoz :
