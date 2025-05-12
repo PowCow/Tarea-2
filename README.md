@@ -2,16 +2,15 @@
 
 # SPOTIFIND : Buscador de canciones personalizado
 DESCRIPCIÓN
+
 SpotiFind es una aplicación de que se carga en la termina que permite explorar una base de datos musical y buscar canciones según distintos criterios: género, artista o tempo (velocidad de la canción). Para poder hacer esto, la aplicación carga un gran volumen de canciones con su respectiva información desde un archivo .CSV.  Una de las funcionalidades destacadas yace en la capacidad de crear listas de reproducciones personalizadas, pudiendo así organizarlas por preferencia.
 
 1. Como compilar y ejecutar :
    
     Para ejecutar nuestro programa deberás descargar los archivos "tarea2.exe" y "songdataset.csv". A continuación deberás crear una nueva carpeta y mover los archivos anteriormente descargados, deberá quedar en un formato parecido a la carpeta "programa" adjunta en el repositorio. 
 
-    Al abrir la carpeta ya con los archivos adjuntos, unicamente hará falta ejecutar el archivo "tarea2.exe".
-    * Requisitos previos :
-   
-        Trabaja desde la terminal, por lo que no existen prerrequisitos mas que abrir el archivo  .exe, el cual está de antemano en una carpeta junto al archivo .csv. Al hacer doble clic en el .exe se abrirá la terminal con el programa listo para su uso.
+   Al abrir la carpeta ya con los archivos adjuntos, unicamente hará falta ejecutar el archivo "tarea2.exe".
+   Link de descarga : https://www.mediafire.com/file/iqfqj67guowuup5/programa.rar/file
    
 3. Opciones que funcionan correctamente y las que no (posibles causas) :
     - Funcionando Correctamente :
