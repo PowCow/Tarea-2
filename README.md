@@ -35,7 +35,219 @@ SpotiFind es una aplicación de que se carga en la termina que permite explorar 
          (ej: blues ✓ Blues ✗ BLUES ✗)
    
 4. Ejemplo de interaccion con la aplicacion :
-    
+    1. Al abrir el programa:
+       
+               ========================================
+                             SPOTIFIND
+               ========================================
+               1) Cargar Canciones
+               2) Buscar por Genero
+               3) Buscar por Artista
+               4) Buscar por Tempo
+               5) Crear lista de reproduccion
+               6) Agregar cancion a lista de reproduccion
+               7) Mostrar canciones de una lista de reproduccion
+               8) Salir
+
+   2. Cargar canciones: Opción seleccionada (1)
+      
+            Seleccione cuantas canciones desea cargar (maximo = 113998):
+
+   Ingresamos: 20000
+   Nos muestra lo siguiente:
+
+         Cargando canciones...
+
+   Luego nos devuelve al menú principal
+
+   3.  Buscar por genero: Opción seleccionada (2)
+      
+               =========================================
+                        BUSQUEDA POR GENERO
+               =========================================
+               
+               Ingrese el nombre del genero:
+   Ingresamos: blues 
+   En este caso cargan 1000 canciones, pero mostramos en el ejemplo las 3 últimas:
+
+         Cancion 998
+         ID: 8997
+         Titulo: Don't Let Me Be Misunderstood
+         Album: Remnant From The Ashes The Ultimate Fantasy Playlist
+         Artistas: Eric Burdon
+         Tempo: 113 BPM
+         
+         ------------------------------------------
+         
+         Cancion 999
+         ID: 8998
+         Titulo: Don't Let Me Be Misunderstood
+         Album: Disciples Liberation The Ultimate Fantasy Playlist
+         Artistas: Eric Burdon
+         Tempo: 113 BPM
+         
+         ------------------------------------------
+         
+         Cancion 1000
+         ID: 8999
+         Titulo: Sempre Brilhar├í - Ao Vivo
+         Album: Quem Foi Que Falou Que Acabou o Rock'N Roll? (Ao Vivo)
+         Artistas: Celso Blues Boy
+         Tempo: 100 BPM
+         
+         ------------------------------------------
+
+   Luego nos devuelve al menú principal 
+
+   4. Buscar por artista: Opción seleccionada (3)
+      
+            =========================================
+                     BUSQUEDA POR ARTISTA
+            =========================================
+            
+            Ingrese el nombre del artista:
+   Ingresamos: B.B. King 
+   Y nos muestra:
+
+         Canciones del artista B.B. King:
+
+         Cancion 1
+         ID: 8157
+         Titulo: Please Come Home For Christmas - Album Version / Addtl. Strings
+         Album: Christmas Eve At Home
+         Genero: blues
+         Tempo: 96 BPM
+         
+         ------------------------------------------
+         
+         Cancion 2
+         ID: 8185
+         Titulo: Please Come Home For Christmas
+         Album: Home For Christmas 2022
+         Genero: blues
+         Tempo: 96 BPM
+         
+         ------------------------------------------
+         
+         Cancion 3
+         ID: 8187
+         Titulo: Back Door Santa
+         Album: pov: you ride on santa's sleigh
+         Genero: blues
+         Tempo: 112 BPM
+         
+         ------------------------------------------
+
+   Luego de mostrar todas las canciones del artista nos devuelve al menú principal
+
+   5.  Buscar por tempo: Opción seleccionada (4)
+   
+            =========================================
+                     BUSQUEDA POR TEMPO
+            =========================================
+            
+            Ingrese una opcion de tempo:
+            1) Lentas (Tempo menos de 80 BPM)
+            2) Moderadas (Tempo entre 80 y 120 BPM)
+            3) Rapidas (Tempo mayor a 120 BPM)
+
+   Ingresamos: 3
+   Nos muestran todas las canciones correspondientes a ese tempo:
+
+         Cancion 9845
+         ID: 19996
+         Titulo: Gin ├á l'eau sal├®e
+         Album: Gin ├á l'eau sal├®e
+         Artistas: Salebarbes
+         Genero: country
+         Tempo: 172 BPM
+         
+         ------------------------------------------
+         
+         Cancion 9846
+         ID: 19997
+         Titulo: Some Girls Do
+         Album: Best Of
+         Artistas: Sawyer Brown
+         Genero: country
+         Tempo: 139 BPM
+         
+         ------------------------------------------
+         
+         Cancion 9847
+         ID: 19998
+         Titulo: Blow My Smoke
+         Album: Creeker
+         Artistas: Upchurch
+         Genero: country
+         Tempo: 150 BPM
+         
+         ------------------------------------------
+
+   Luego nos devuelve al menú principal
+
+   6.  Crear lista de reproducción: Opción seleccionada (5)
+      
+            =========================================
+                     CREAR LISTA DE REPRODUCCION
+            =========================================
+            
+            Ingrese el nombre de la lista de reproduccion:
+
+   Ingresamos: temazos
+
+         Lista de reproduccion temazos creada con exito!
+
+   Luego nos devuelve al menú principal
+
+   7. Agregar canción a lista de reproducción: Opción seleccionada (6)
+      
+            =========================================
+                     AGREGAR CANCION A PLAYLIST
+            =========================================
+            
+            Ingrese el nombre de la lista de reproduccion:
+
+   Ingresamos: temazos
+
+         Lista de reproduccion encontrada!
+         Ingrese el ID de la cancion a agregar:
+
+   Ingresamos: 6666
+
+         Cancion encontrada!
+         Cancion 'Beneath a December Twilight' ha sido agregada a la lista de reproduccion temazos
+
+   Luego nos devuelve al menú principal 
+
+   8. Mostrar canciones de una lista de reproducción: Opción seleccionada (7)
+      
+            =========================================
+                 MOSTRAR CANCIONES DE PLAYLIST
+            =========================================
+            
+            Ingrese el nombre de la lista de reproduccion:
+
+   Ingresamos: temazos
+
+         Lista de reproduccion encontrada!
+         Canciones de la lista de reproduccion temazos:
+         
+         Cancion 1
+         ID: 6666
+         Titulo: Beneath a December Twilight
+         Album: The Slaughter of Innocence, A Requiem for the Mighty
+         Artistas: Hecate Enthroned
+         Genero: black-metal
+         Tempo: 131 BPM
+         
+         ------------------------------------------
+
+   Luego nos devuelve al menú principal 
+
+   9. Salir: Opción seleccionada (8)
+       
+            Cierra el programa 
    
 5. Contribucion de cada integrante :
    - Flavio Luna :
